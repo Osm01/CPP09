@@ -88,13 +88,13 @@ int	BitcoinExchange::checking_key(std::string key)
 	while (getline(ss, check, '-'))
 	{
 		int v = strtol(check.c_str(), &endptr, 10);
-		if (*endptr)
+		if (*endptr && *endptr != 32)
 			return 0;
 		else
 		{
 			if (i == 0)
 			{
-				if (v < 2009 || v > 2022)
+				if (v < 2009)
 					return 0;
 				v % 4 == 0 ? this->days[0] = 29 : this->days[0] = 31;
 			}
@@ -120,14 +120,14 @@ int	BitcoinExchange::checking_value(std::string value)
 	double	v;
 
 	v = strtod(value.c_str(), &endptr);
-	if ((strlen(endptr) > 1) ||(strlen(endptr) == 1 && endptr[0] != 'f'))
+	if ((strlen(endptr) > 1) || (strlen(endptr) == 1 && endptr[0] != 'f'))
 		return (std::cout << "Error: bad input => " << value << std::endl ,0);
 	if (v < 0 || v > 1000)
 	{
 		if (v > 1000)
 			return (std::cout << RED << "Error: too large a number." << RESET << std::endl, 0);
 		else
-			return (std::cout << RED << "Error: too small a number." << RESET << std::endl, 0);
+			return (std::cout << RED << "Error: not a positive number." << RESET << std::endl, 0);
 	}
 	return 1;
 }
@@ -138,15 +138,15 @@ void BitcoinExchange::fill_input_data(void)
 	std::string value;
 	std::string line;
 	int 		first_is_key;
-
+	int			count;
 	std::ifstream *in = read_file(this->input_file_name);
 
 	if (!in)
-		return (std::cout << RED << this->input_file_name << " not exist or not a file" << RESET << std::endl, static_cast<void>(exit(0)));
+		return ;
 	do {
 		getline(*in, line);
-	} while (line != "\n");
-	if (line != "data | value")
+	} while (line.empty());
+	if (line != "date | value")
 		return (std::cout << RED << "Incorrect input file" << RESET << std::endl, delete in, static_cast<void>(exit(0)));
 	while (getline(*in, line))
 	{
@@ -154,29 +154,36 @@ void BitcoinExchange::fill_input_data(void)
 		key.empty();
 		value.empty();
 		first_is_key = 1;
+		count = 0;
 		while (getline(ss,value, '|'))
 		{
-			// check multiple | delimiter
 			if (first_is_key)
 			{
 				key = value;
-				value.empty();
 				first_is_key = 0;
 			}
+			count ++;
 		}
-		if (key.empty() || value.empty())
+		if (count != 2)
 			std::cout << "Error: bad input => " << line << std::endl;
 		else
 		{
 			if (!checking_key(key))
 				std::cout << "Error: bad input => " << line << std::endl;
-//			else if (checking_value(value))
-//			{
-//
-//			}
+			else if (checking_value(value))
+			{
+				if (key < "2009-01-02")
+					std::cout << RED <<  "value tooooo low "  << RESET << std::endl;
+				else
+				{
+					std::map<std::string , double>::iterator it = this->data.lower_bound(key);
+					it --;
+					std::cout << key << "=>" << value << " = " << it->second * strtod(value.c_str(), NULL) << std::endl;
+				}
+			}
 		}
 	}
-	return (std::cout << GREEN << this->input_file_name << " has been successfully stored" << RESET << std::endl , delete in);
+	delete in;
 }
 
 void BitcoinExchange::display_data(void)
