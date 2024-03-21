@@ -1,17 +1,24 @@
 
 #include "PmergeMe.h"
 
-int main()
+int main(int argc, const char **argv)
 {
-    std::list<int> l;
-    l.push_back(10);
-    l.insert(l.begin(), 20);
-    std::vector<int> v;
-    v.push_back(10);
-    v.insert(v.begin(), 20);
-    for (std::list<int>::iterator it = l.begin() ; it != l.end() ; it ++)
-        std::cout << *it << std::endl;
-    for (std::vector<int>::iterator it = v.begin() ; it != v.end() ; it ++)
-        std::cout << *it << std::endl;
-    
+	std::vector<int> v;
+	if (argc > 2)
+	{
+		int index = 0;
+		while (++index < argc)
+		{
+			char *endptr;
+			double value = strtol(argv[index], &endptr, 10);
+			if (*endptr || value < 0 || value > INT_MAX)
+				return (std::cout << RED << "Error" << RESET << std::endl, 0);
+			v.push_back(value);
+		}
+		mergeSort_vector(v, 0, v.size() - 1);
+
+	}
+	else
+		std::cout << RED << "Insufficient <`element`>" << RESET << std::endl;
+	return 0;
 }

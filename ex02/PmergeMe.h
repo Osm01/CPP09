@@ -20,10 +20,10 @@
 # include <sstream>
 # include <stdlib.h>
 # include <list>
+# include <climits>
 
-class PmergeMe {
-
-};
-
+std::vector<int>	ford_johnson_vector(std::vector<int> &data);
+void				mergeSort_vector(std::vector<int> &data , int left , int right);
+void				merge(std::vector<int> &data, int left, int mid, int right);
 
 #endif //CPP09_PMERGEME_H
