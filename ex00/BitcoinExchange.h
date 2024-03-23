@@ -16,6 +16,7 @@
 # include <iostream>
 # include <map>
 # include <vector>
+# include <array>
 # include <fstream>
 #include <stdlib.h>
 #include <sstream>
@@ -29,7 +30,7 @@ private :
 	const char						*input_file_name;
 	std::map<std::string, double>	input_data;
 	std::map<std::string, double>	data;
-	std::vector<int>				days;
+	int								days[12];
 public:
 	BitcoinExchange(const char *file_name);
 	BitcoinExchange(const BitcoinExchange &b);

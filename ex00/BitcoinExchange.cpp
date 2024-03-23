@@ -8,18 +8,30 @@
 BitcoinExchange::BitcoinExchange(const char *file_name)
 {
 	this->input_file_name = file_name;
-	this->days.push_back(31);
-	this->days.push_back(28);
-	this->days.push_back(31);
-	this->days.push_back(30);
-	this->days.push_back(31);
-	this->days.push_back(30);
-	this->days.push_back(31);
-	this->days.push_back(31);
-	this->days.push_back(30);
-	this->days.push_back(31);
-	this->days.push_back(30);
-	this->days.push_back(31);
+//	this->days.push_back(31);
+//	this->days.push_back(28);
+//	this->days.push_back(31);
+//	this->days.push_back(30);
+//	this->days.push_back(31);
+//	this->days.push_back(30);
+//	this->days.push_back(31);
+//	this->days.push_back(31);
+//	this->days.push_back(30);
+//	this->days.push_back(31);
+//	this->days.push_back(30);
+//	this->days.push_back(31);
+	days[0] = 31;
+	days[1] = 28;
+	days[2] = 31;
+	days[3] = 30;
+	days[4] = 31;
+	days[5] = 30;
+	days[6] = 31;
+	days[7] = 31;
+	days[8] = 30;
+	days[9] = 31;
+	days[10] = 30;
+	days[11] = 31;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &b)
@@ -29,7 +41,13 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &b)
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &b){
 	if (this != &b)
-		this->days = b.days;
+	{
+		this->input_data = b.input_data;
+		this->data = b.data;
+		int i = -1;
+		while (++i < 12)
+			this->days[i] = b.days[i];
+	}
 	return (*this);
 }
 

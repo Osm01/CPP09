@@ -21,9 +21,15 @@
 # include <stdlib.h>
 # include <list>
 # include <climits>
+#include <ctime>
+#include <sys/time.h>
 
 std::vector<int>	ford_johnson_vector(std::vector<int> &data);
 void				mergeSort_vector(std::vector<int> &data , int left , int right);
 void				merge(std::vector<int> &data, int left, int mid, int right);
+
+std::deque<int>		ford_johnson_deque(std::deque<int> &data);
+void				mergeSort_deque(std::deque<int> &data , int left , int right);
+void				merge_deque(std::deque<int> &data, int left, int mid, int right);
 
 #endif //CPP09_PMERGEME_H
