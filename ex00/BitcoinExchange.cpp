@@ -214,5 +214,5 @@ void BitcoinExchange::display_data(void)
 
 BitcoinExchange::~BitcoinExchange()
 {
-	std::cout << RED << "Calling destructor" <<  RESET << std::endl;
+	//std::cout << RED << "Calling destructor" <<  RESET << std::endl;
 }

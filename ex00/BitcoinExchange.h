@@ -16,7 +16,6 @@
 # include <iostream>
 # include <map>
 # include <vector>
-# include <array>
 # include <fstream>
 #include <stdlib.h>
 #include <sstream>

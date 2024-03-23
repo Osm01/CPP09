@@ -24,7 +24,7 @@ void				merge(std::vector<int> &data, int left, int mid, int right)
 			data[i] = right_vector[r ++];
 		else
 			data[i] = left_vector[l ++];
-		i ++;
+		i++;
 	}
 	while (l < left_vector.size())
 		data[i ++] = left_vector[l ++];

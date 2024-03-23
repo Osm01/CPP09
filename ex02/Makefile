@@ -2,7 +2,7 @@
 NAME = PmergeMe
 
 CPPFILES = main.cpp PmergeMe.cpp
-CPPCOMPI = c++ -std=c++98 #-Wall -Wextra -Werror -fsanitize=address
+CPPCOMPI = c++ -std=c++98 -Wall -Wextra -Werror -fsanitize=address
 
 all : $(NAME)
 

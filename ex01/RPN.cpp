@@ -51,6 +51,8 @@ void	post_reverse_notation(int argc, const char **argv)
 						s.pop();
 						int v2 = s.top();
 						s.pop();
+						if (v1 == 0 && *it == '/')
+							return (static_cast<void>(std::cout << RED << "Error" << std::endl));
 						s.push(calculate(*it, v1, v2));
 					}
 					else
