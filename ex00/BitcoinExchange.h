@@ -38,7 +38,7 @@ public:
 	void			fill_data(void);
 	void			fill_input_data(void);
 	int 			checking_key(std::string key);
-	int 			checking_value(std::string value);
+	int 			checking_value(std::string value, std::string &line);
 	void			display_data(void);
 	~BitcoinExchange();
 };

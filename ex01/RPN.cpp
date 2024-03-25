@@ -38,9 +38,7 @@ void	post_reverse_notation(int argc, const char **argv)
 		for (std::string::iterator it = str.begin() ; it != str.end() ; it ++)
 		{
 			if (*it >= '0' && *it <= '9')
-			{
 				s.push(*it - 48);
-			}
 			else if ((*it != ' ' && *it != '\t'))
 			{
 				if (*it == '+' || *it == '-' || *it == '*' || *it == '/')
@@ -54,6 +52,7 @@ void	post_reverse_notation(int argc, const char **argv)
 						if (v1 == 0 && *it == '/')
 							return (static_cast<void>(std::cout << RED << "Error" << std::endl));
 						s.push(calculate(*it, v1, v2));
+					
 					}
 					else
 						return (static_cast<void>(std::cout << RED << "Error" << std::endl));

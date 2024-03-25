@@ -132,14 +132,14 @@ int	BitcoinExchange::checking_key(std::string key)
 	return 1;
 }
 
-int	BitcoinExchange::checking_value(std::string value)
+int	BitcoinExchange::checking_value(std::string value, std::string &line)
 {
 	char	*endptr;
 	double	v;
 
 	v = strtod(value.c_str(), &endptr);
 	if ((strlen(endptr) > 1) || (strlen(endptr) == 1 && endptr[0] != 'f'))
-		return (std::cout << "Error: bad input => " << value << std::endl ,0);
+		return (std::cout << "Error: bad input => " << line << std::endl ,0);
 	if (v < 0 || v > 1000)
 	{
 		if (v > 1000)
@@ -188,7 +188,7 @@ void BitcoinExchange::fill_input_data(void)
 		{
 			if (!checking_key(key))
 				std::cout << "Error: bad input => " << line << std::endl;
-			else if (checking_value(value))
+			else if (checking_value(value, line))
 			{
 				if (key < "2009-01-02")
 					std::cout << RED <<  "value tooooo low "  << RESET << std::endl;
